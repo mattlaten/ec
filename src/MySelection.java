@@ -1,16 +1,15 @@
-public class MySelection extends Selection 
-{
-    public void initialize(int popsize) 
-    {
-     this.popsize = popsize;
-    }
+public class MySelection extends Selection {
+	int popsize;
 
-    public Individual[] select(Individual[] population) 
-    {
-     Individual[] newPopulation = new Individual[popsize];
+	public void initialize(int popsize) {
+		this.popsize = popsize;
+	}
 
-     //  Code for your selection operator ...
+	public Individual[] select(Individual[] population) {
+		Individual[] newPopulation = new Individual[popsize];
 
-     return newPopulation;
-    }
+		// Code for your selection operator ...
+
+		return newPopulation;
+	}
 }
