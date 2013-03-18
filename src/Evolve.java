@@ -109,7 +109,7 @@ public class Evolve {
 	if (experiments != 1) {	    	
 	    double sd = 0;
 	    for (int i = 0; i < experiments; i++) {
-		sd += Math.pow(average[maxGen - 1] - bestFitness[i], 2)/(1.0/(experiments-1));
+		sd += Math.pow(average[maxGen - 1] - bestFitness[i], 2)*(1.0/(experiments-1));
 	    }
 	    sd = Math.sqrt(sd);
 	    out2.println("#Average best fitness in last generation: " + average[maxGen - 1]);
