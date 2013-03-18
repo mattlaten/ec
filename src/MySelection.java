@@ -9,7 +9,7 @@ public class MySelection extends Selection {
 	
 	int k = 11;
 	double percentParents = 0.9;
-
+	double p = 0.5;
 	
 	public void initialize(int popsize) {
 		this.popsize = popsize;
@@ -32,11 +32,21 @@ public class MySelection extends Selection {
 					tournamentSet[j] = popList.remove((int) Math.floor(Math.random()*popList.size()));
 				}
 				
-				Arrays.sort(tournamentSet, new WeightedRandom());
+				//sort with the weighted random
+				//Arrays.sort(tournamentSet, new WeightedRandom());
 	
+				//not weighted random
+				Arrays.sort(tournamentSet);
+				
 				//System.out.println(tournamentSet[0].getFitness() + " vs " + tournamentSet[k-1].getFitness());
 				//System.out.println("Adding winner from tournamentSet: " + tournamentSet[0]);
-				newPopList.add(tournamentSet[0]);
+				
+				//Determenistic is when p=1
+				//newPopList.add(tournamentSet[0]);
+				
+				//Probabilistic
+				newPopList.add(chooseWinner(tournamentSet));
+				
 				
 				for (int j = 1; j < k; j++) {
 					popList.add(tournamentSet[j]);
@@ -66,6 +76,19 @@ public class MySelection extends Selection {
 		return newPopulation;
 	}
 	
+	//probabilistic selection
+	private Individual chooseWinner (Individual[] tournamentSet)
+	{
+		for (int i=0; i < tournamentSet.length ; i++)
+		{
+			if (Math.random()< p){
+				//System.out.println("Adding winner from tournamentSet: " + i);
+				return tournamentSet[i];				
+			}
+		}
+	return tournamentSet[tournamentSet.length-1];
+	}
+	
 	private class WeightedRandom implements Comparator<Individual>
 	{
 
@@ -81,5 +104,6 @@ public class MySelection extends Selection {
 			return 0;
 		}
 	}
+	
 	
 }
